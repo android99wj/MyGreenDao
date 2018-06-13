@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
    */
   private void addUser() {
     try {
-      User user = new User(null, "wj");
+      User user = new User(null, "wj","18");
       MyApplication.getContext().getSession().getUserDao().insert(user);
       Log.v("GreenDao for WJ", "添加完成");
     } catch (Exception e) {
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     //        List<User> list = MyApplication.getContext().getSession().getUserDao().queryBuilder().where(UserDao.Properties.Name.eq("")).list();
     //        MyApplication.getContext().getSession().getUserDao().queryRaw("wj","");
     for (User user : users) {
-      Log.v("GreenDao for WJ", "查询：" + user.getName());
+      Log.v("GreenDao for WJ", "查询：" + user.getName()+" --- "+user.getAge());
     }
   }
 }
