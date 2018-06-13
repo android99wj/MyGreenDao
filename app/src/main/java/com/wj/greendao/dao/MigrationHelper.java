@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 引用大神工具类-处理数据库
+ */
 public final class MigrationHelper {
 
     private static MigrationHelper helper = new MigrationHelper();
