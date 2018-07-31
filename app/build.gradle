@@ -3,7 +3,7 @@ apply plugin: 'org.greenrobot.greendao'
 
 greendao {
     //指定数据库schema版本号，迁移等操作会用到
-    schemaVersion 2
+    schemaVersion 3
     //dao的包名，包名默认是entity所在的包
     daoPackage 'com.wj.greendao.dao'
     //生成数据库文件的目录，会生成DaoMaster,DaoSession,XXXDao都放在此目录下
