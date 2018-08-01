@@ -3,11 +3,15 @@ package com.wj.greendao;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.DaoException;
 import com.wj.greendao.dao.DaoSession;
 import com.wj.greendao.dao.UserDao;
 import com.wj.greendao.dao.UserSonDao;
+
+import java.util.List;
+import com.wj.greendao.dao.UserGoodsDao;
 
 /**
  * Created by Hannah on 2018/2/6.
@@ -110,11 +114,43 @@ public class User {
     public void setUserSonId(Long userSonId) {
         this.userSonId = userSonId;
     }
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    @Generated(hash = 337006195)
+    public synchronized void resetUserGoodsList() {
+        userGoodsList = null;
+    }
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 147086231)
+    public List<UserGoods> getUserGoodsList() {
+        if (userGoodsList == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            UserGoodsDao targetDao = daoSession.getUserGoodsDao();
+            List<UserGoods> userGoodsListNew = targetDao._queryUser_UserGoodsList(id);
+            synchronized (this) {
+                if(userGoodsList == null) {
+                    userGoodsList = userGoodsListNew;
+                }
+            }
+        }
+        return userGoodsList;
+    }
 
     private Long userSonId;
 
+    //一对一
     @ToOne(joinProperty = "userSonId")
     private UserSon userSon;
+
+    //一对多 此处的userId是在UserGoods中定义的一个变量
+    @ToMany(referencedJoinProperty = "userId")
+    private List<UserGoods> userGoodsList;
+
     @Generated(hash = 311550425)
     private transient Long userSon__resolvedKey;
     /** Used for active entity operations. */
